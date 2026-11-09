@@ -1,4 +1,4 @@
-import { Product } from "./product"
+import { Product } from "./Product"
 
 export type SearchProductRes={
     responseCode: number,

@@ -1,0 +1,1 @@
+export const searchKeyWords=["jean","top","tshirt","TOP","aokhoa"];

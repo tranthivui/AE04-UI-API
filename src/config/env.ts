@@ -12,7 +12,4 @@ function requireEnv(name:string):string{
 
 export const ENV={
     baseUrl: requireEnv("BASE_URL"),
-    userEmail: requireEnv("USER_EMAIL"),
-    userName: requireEnv("USER_NAME"),
-    userPassword: requireEnv("USER_PASSWORD"),
 }

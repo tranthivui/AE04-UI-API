@@ -328,7 +328,8 @@
   "products": []
 }
 ```
-# 1.5 Tìm kiếm hoa thường cho cùng một kết quả
+# 1.5 Tìm kiếm hoa thường
+- Tìm kiếm hoa thường cho cùng một kết quả, không phân biệt hoa thường
 # 1.6 API tìm theo tên/category
 - Ví dụ search với từ khóa=winter -> Trả về sản phẩm tên chứa winter, category và brand đều không chứa winter
 - Ví dụ search với từ khóa=top -> Trả về sản phẩm với tên Little Girls Mr. Panda Shirt không chứa top, category=Tops & Shirts
