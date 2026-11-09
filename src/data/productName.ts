@@ -1,0 +1,1 @@
+export const productNames=["jean","top","tshirt"];

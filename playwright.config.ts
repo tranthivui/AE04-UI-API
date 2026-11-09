@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import { ENV } from './src/config/env';
 
 /**
  * Read environment variables from file.
@@ -29,6 +30,7 @@ export default defineConfig({
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    baseURL: ENV.baseUrl,
     trace: 'on-first-retry',
   },
 
