@@ -5,7 +5,7 @@ export type SearchProductRes={
     products: Product []
 }
 
-export type SearchNotKeywordRes={
+export type ApiMessageResponse={
     responseCode: number,
     message: string
 }

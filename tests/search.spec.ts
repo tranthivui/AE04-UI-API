@@ -1,13 +1,11 @@
 import { expect } from '@playwright/test';
 import { test } from "../src/fixtures/ApiFixture.fixture"
 import { searchKeyWords } from '../src/data/searchKeyWords';
-import { SearchNotKeywordRes, SearchProductRes } from '../src/types/response';
 import { getSearchResult } from './helpers/search.helper';
+import { ApiMessageResponse } from '../src/types/response';
+import { testData } from '../src/data/message';
 
 test.describe("Verify search", () => {
-  const testData = {
-    searchWithoutKeyMess: "Bad request, search_product parameter is missing in POST request."
-  }
   for (const searchText of searchKeyWords.found) {
     test(`AE04-01: Search API: ${searchText}`, async ({ productApi }) => {
       const products = await getSearchResult(productApi, searchText);
@@ -27,10 +25,10 @@ test.describe("Verify search", () => {
     expect(products).toHaveLength(0);
   })
 
-  test("AE04-API-NEG-01: Search API without keyword", async ({ productApi }) => {
+  test("AE04-API-NEG-02: Search API without keyword", async ({ productApi }) => {
     const searchRes = await productApi.searchProductWithoutKeyword();
     expect(searchRes.status()).toBe(200);
-    const searchResData: SearchNotKeywordRes = await searchRes.json();
+    const searchResData: ApiMessageResponse = await searchRes.json();
     expect(searchResData.responseCode).toBe(400);
     expect(searchResData.message).toBe(testData.searchWithoutKeyMess);
   })
