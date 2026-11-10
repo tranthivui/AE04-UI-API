@@ -3,7 +3,7 @@ import { test } from "../src/fixtures/ApiFixture.fixture"
 import { searchKeyWords } from '../src/data/searchKeyWords';
 import { getSearchResult } from './helpers/search.helper';
 import { ApiMessageResponse } from '../src/types/response';
-import { testData } from '../src/data/message';
+import { message } from '../src/data/message';
 
 test.describe("Verify search", () => {
   for (const searchText of searchKeyWords.found) {
@@ -30,6 +30,6 @@ test.describe("Verify search", () => {
     expect(searchRes.status()).toBe(200);
     const searchResData: ApiMessageResponse = await searchRes.json();
     expect(searchResData.responseCode).toBe(400);
-    expect(searchResData.message).toBe(testData.searchWithoutKeyMess);
+    expect(searchResData.message).toBe(message.searchWithoutKeyMess);
   })
 })
