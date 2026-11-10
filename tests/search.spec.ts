@@ -1,31 +1,37 @@
 import { expect } from '@playwright/test';
 import { test } from "../src/fixtures/ApiFixture.fixture"
 import { searchKeyWords } from '../src/data/searchKeyWords';
-import { SearchProductRes } from '../src/types/response';
+import { SearchNotKeywordRes, SearchProductRes } from '../src/types/response';
+import { getSearchResult } from './helpers/search.helper';
 
-test.describe("Verify search",()=>{
-    for(const searchText of searchKeyWords.found){
-      test(`AE04-01: Search API: ${searchText}`,async({productApi})=>{
-        const searchProductRes=await productApi.searchProduct(searchText);
-        expect(searchProductRes.status()).toBe(200);
-        const searchProductResData:SearchProductRes=await searchProductRes.json();
-        expect(searchProductResData.responseCode).toBe(200);
-        expect(searchProductResData.products.length,`No product found for ${searchText}`).toBeGreaterThan(0);
-        for(const product of searchProductResData.products){
-          expect(
-            product.name.toLowerCase().includes(searchText.toLowerCase()) ||
-            product.category.category.toLowerCase().includes(searchText.toLowerCase()), 
-            `Product ${product.name} has neither name nor category containing ${searchText}`
-          ).toBe(true);
-        }
-      })
-    };
+test.describe("Verify search", () => {
+  const testData = {
+    searchWithoutKeyMess: "Bad request, search_product parameter is missing in POST request."
+  }
+  for (const searchText of searchKeyWords.found) {
+    test(`AE04-01: Search API: ${searchText}`, async ({ productApi }) => {
+      const products = await getSearchResult(productApi, searchText);
+      expect(products.length, `No product found for ${searchText}`).toBeGreaterThan(0);
+      for (const product of products) {
+        expect(
+          product.name.toLowerCase().includes(searchText.toLowerCase()) ||
+          product.category.category.toLowerCase().includes(searchText.toLowerCase()),
+          `Product ${product.name} has neither name nor category containing ${searchText}`
+        ).toBe(true);
+      }
+    })
+  };
 
-    test("AE04-API-NEG-01: Search API with no result", async({productApi})=>{
-        const searchProductRes=await productApi.searchProduct(searchKeyWords.notFound);
-         expect(searchProductRes.status()).toBe(200);
-        const searchProductResData:SearchProductRes=await searchProductRes.json();
-        expect(searchProductResData.responseCode).toBe(200);
-        expect(searchProductResData.products).toHaveLength(0);
-      })
+  test("AE04-API-NEG-01: Search API with no result", async ({ productApi }) => {
+    const products = await getSearchResult(productApi, searchKeyWords.notFound);
+    expect(products).toHaveLength(0);
+  })
+
+  test("AE04-API-NEG-01: Search API without keyword", async ({ productApi }) => {
+    const searchRes = await productApi.searchProductWithoutKeyword();
+    expect(searchRes.status()).toBe(200);
+    const searchResData: SearchNotKeywordRes = await searchRes.json();
+    expect(searchResData.responseCode).toBe(400);
+    expect(searchResData.message).toBe(testData.searchWithoutKeyMess);
+  })
 })

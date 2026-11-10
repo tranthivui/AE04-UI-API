@@ -16,4 +16,9 @@ export class ProductApi {
         });
         return searchProductRes;
     }
+
+    async searchProductWithoutKeyword(): Promise<APIResponse> {
+        const searchProductRes = await this.request.post(API_SEARCH_PRODUCT);
+        return searchProductRes;
+    }
 }

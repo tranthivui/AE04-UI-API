@@ -5,3 +5,7 @@ export type SearchProductRes={
     products: Product []
 }
 
+export type SearchNotKeywordRes={
+    responseCode: number,
+    message: string
+}
