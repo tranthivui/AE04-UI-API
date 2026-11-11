@@ -371,6 +371,7 @@
     - Tiêu đề đổi thành: Searched Products
 - Tìm kiếm với từ khóa không có kết quả: UI hiển thị tiêu đề Searched Products với list rỗng
 - Có thể vào thẳng bằng URL /products?search=jean thay vì gõ vào ô tìm kiếm. Kết quả giống nhau
+- Khi so sanh ket qua tu API va UI khong can sort truoc khi so sanh vi thu tu tren UI va API da giong nhau
 
 # 4. So sánh
 - Với cùng một từ khóa

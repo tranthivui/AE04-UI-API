@@ -25,11 +25,11 @@ export class ProductPage {
     }
 
     getListProductNames(): Locator{
-        return this.page.locator(".productinfo.text-center p");
+        return this.searchResultArea.locator(".productinfo.text-center p");
 
     }
 
-    async fillSearchKeywor(keyword:string){
+    async fillSearchKeyword(keyword:string){
         await this.searchInput.fill(keyword);
     }
 
@@ -38,7 +38,7 @@ export class ProductPage {
     }
 
     async search(keyword:string){
-        await this.fillSearchKeywor(keyword);
+        await this.fillSearchKeyword(keyword);
         await this.clickSearchBtn();
     }
 }

@@ -3,11 +3,11 @@ import { expect, test } from "../../src/fixtures/index.fixture";
 import { getSearchResult } from "../helpers/search.helper";
 
 test.describe("Verify search result from UI with API", () => {
-    for (const productName of searchKeyWords.found) {
-        test(`Verify search keyword: ${productName}`, async ({ productApi, productPage }) => {
-            const productFromApi = await getSearchResult(productApi, productName);
+    for (const keyword of searchKeyWords.found) {
+        test(`AE04-UI-01: search UI "${keyword}" matches API`, async ({ productApi, productPage }) => {
+            const productFromApi = await getSearchResult(productApi, keyword);
             await productPage.goto();
-            await productPage.search(productName);
+            await productPage.search(keyword);
             await expect(productPage.searchTitle).toBeVisible();
             const listProductNames = productPage.getListProductNames();
             await expect(listProductNames).toHaveCount(productFromApi.length);
@@ -21,6 +21,6 @@ test.describe("Verify search result from UI with API", () => {
         await productPage.goto();
         await productPage.search(searchKeyWords.notFound);
         await expect(productPage.searchTitle).toBeVisible();
-        await expect(productPage.productList).not.toBeVisible();
+        await expect(productPage.getListProductNames()).toHaveCount(0);
     })
 })
