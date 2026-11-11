@@ -1,9 +1,8 @@
-import { expect } from '@playwright/test';
-import { test } from "../src/fixtures/ApiFixture.fixture"
-import { searchKeyWords } from '../src/data/searchKeyWords';
-import { getSearchResult } from './helpers/search.helper';
-import { ApiMessageResponse } from '../src/types/response';
-import { message } from '../src/data/message';
+import { test,expect } from "../../src/fixtures/index.fixture";
+import { searchKeyWords } from '../../src/data/searchKeyWords';
+import { getSearchResult } from '../helpers/search.helper';
+import { ApiMessageResponse } from '../../src/types/response';
+import { message } from '../../src/data/message';
 
 test.describe("Verify search", () => {
   for (const searchText of searchKeyWords.found) {

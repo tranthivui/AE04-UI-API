@@ -5,7 +5,7 @@ type ApiFixture={
     productApi: ProductApi;
 }
 
-export const test=base.extend<ApiFixture>({
+export const apiTest=base.extend<ApiFixture>({
     productApi: async({request}, use)=>{
         const productApi= new ProductApi(request);
         await use(productApi);
