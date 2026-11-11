@@ -7,7 +7,7 @@ export type PageFixture = {
 
 export const test = base.extend<PageFixture>({
     productPage: async ({ page }, use) => {
-        blockAds(page);
+        await blockAds(page);
         const productPage = new ProductPage(page);
         await use(productPage);
     }
